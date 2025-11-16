@@ -1,0 +1,62 @@
+/* src/styles/mapa.css */
+
+.mapa-page-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 3rem;
+}
+
+/* Encabezado */
+.mapa-header {
+  margin-bottom: 1.6rem;
+}
+
+.mapa-header .app-badge {
+  margin-bottom: 0.5rem;
+}
+
+.mapa-header h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+}
+
+.mapa-header p {
+  margin: 0.2rem 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* Grid principal: zonas + alertas */
+.mapa-main {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+  gap: 1.5rem;
+}
+
+/* Card izquierda (zonas + mapa) */
+.mapa-zonas-card .card-header {
+  margin-bottom: 0.7rem;
+}
+
+/* Card derecha (alertas) */
+.mapa-alertas-card .card-header {
+  margin-bottom: 0.7rem;
+}
+
+/* Hacer scroll propio a la lista de alertas si se hace muy larga */
+.mapa-alertas-scroll {
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .mapa-page-inner {
+    padding: 1.8rem 1.25rem 2.5rem;
+  }
+
+  .mapa-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

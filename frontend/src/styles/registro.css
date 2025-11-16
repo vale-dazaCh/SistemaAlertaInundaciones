@@ -1,0 +1,79 @@
+/* src/styles/registro.css */
+
+/* Contenedor general de la página de registro */
+.registro-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 3rem;
+}
+
+/* Dos columnas: texto izquierda / formulario derecha */
+.registro-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.1fr);
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+/* Columna izquierda */
+.registro-info {
+  text-align: left;
+}
+
+.registro-title {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 2.1rem;
+  font-weight: 600;
+}
+
+.registro-subtitle {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--muted);
+  max-width: 34rem;
+}
+
+.registro-question {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.registro-text {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+  color: var(--fg);
+  max-width: 34rem;
+}
+
+/* Columna derecha: tarjeta del formulario */
+.registro-form-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.registro-card {
+  width: 100%;
+  max-width: 520px;
+}
+
+/* Enlace de volver */
+.registro-back-link {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+}
+
+/* Responsive: en pantallas pequeñas pasamos a una sola columna */
+@media (max-width: 960px) {
+  .registro-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .registro-form-wrapper {
+    justify-content: flex-start;
+  }
+
+  .registro-card {
+    max-width: 100%;
+  }
+}
