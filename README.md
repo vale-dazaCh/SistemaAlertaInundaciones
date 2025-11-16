@@ -1,4 +1,4 @@
-# Sistema de Alerta Temprana de Inundaciones – Cercado 🌧️
+# Sistema de Alerta Temprana de Inundaciones en Cercado 🌧️
 
 Repositorio del prototipo web de un **Sistema de Alerta Temprana de Inundaciones** para el municipio de **Cochabamba – Cercado**.  
 
