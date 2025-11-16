@@ -27,8 +27,7 @@ class AlertaActivaViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Alerta.objects.filter(activa=True).select_related("zona")
     serializer_class = AlertaSerializer
 
-
-# OPCIONAL: si luego quieres estaciones y lecturas:
+# OPCIONAL:si luego quieres estaciones y lecturas:
 
 class EstacionMeteorologicaViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = EstacionMeteorologica.objects.all()
