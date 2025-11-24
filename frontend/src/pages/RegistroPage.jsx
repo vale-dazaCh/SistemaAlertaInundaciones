@@ -100,20 +100,7 @@ function RegistroPage() {
                 />
               </label>
 
-              <label className="form-field">
-                <span>Rol</span>
-                <select
-                  name="rol"
-                  value={form.rol}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="ciudadania">Ciudadanía</option>
-                  <option value="autoridad">
-                    Autoridad / Gestión de riesgo
-                  </option>
-                </select>
-              </label>
+              
 
               <button
                 type="submit"
