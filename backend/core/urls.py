@@ -17,4 +17,6 @@ router.register("lecturas", LecturaMeteorologicaViewSet, basename="lectura")
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
+    # 👇 Nueva API de autenticación
+    path("api/auth/", include("api_auth.urls")),
 ]

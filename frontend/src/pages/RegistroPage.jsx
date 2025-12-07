@@ -16,15 +16,33 @@ function RegistroPage() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    // Aquí luego se puede hacer POST a Django.
-    console.log("Datos de registro (demo):", form);
-    alert(
-      "Registro de ejemplo enviado.\nEn la siguiente fase se conectará este formulario al backend."
-    );
-  };
+  try {
+    const res = await fetch("http://localhost:8000/api/auth/registro/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert("Error: " + data.detail);
+      return;
+    }
+
+    alert("Registro exitoso. Bienvenido!");
+    console.log("TOKEN:", data.access);
+
+  } catch (err) {
+    console.error(err);
+    alert("Error de conexión con el servidor.");
+  }
+};
+
+
 
   return (
     <div className="registro-page">
@@ -107,7 +125,7 @@ function RegistroPage() {
                 className="btn-primary"
                 style={{ marginTop: "0.7rem" }}
               >
-                Registrarse (demo)
+                Registrarse
               </button>
 
               <p className="form-note">

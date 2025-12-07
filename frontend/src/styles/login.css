@@ -1,0 +1,95 @@
+/* ================================
+   ESTILOS PARA LOGIN (similar a registro)
+   ================================ */
+
+/* Contenedor general */
+.login-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 3rem;
+}
+
+/* Grid de dos columnas */
+.login-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+/* Columna izquierda: texto */
+.login-info {
+  text-align: left;
+}
+
+.login-title {
+  margin: 0.5rem 0 0.3rem;
+  font-size: 2.1rem;
+  font-weight: 600;
+}
+
+.login-subtitle {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 34rem;
+}
+
+.login-text {
+  margin: 0.75rem 0;
+  font-size: 0.95rem;
+  color: var(--fg);
+}
+
+/* Columna derecha: tarjeta */
+.login-form-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 450px;
+}
+
+/* Contenedor del formulario */
+.form-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.95rem;
+}
+
+.form-field input {
+  padding: 0.65rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+/* Enlace inferior */
+.login-back-link {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .login-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .login-form-wrapper {
+    justify-content: flex-start;
+  }
+
+  .login-card {
+    max-width: 100%;
+  }
+}
