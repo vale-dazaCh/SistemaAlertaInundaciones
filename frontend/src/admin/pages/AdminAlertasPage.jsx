@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AdminSidebar from "../components/AdminSidebar";
-import "../styles/zonas.css";
+import "../styles/alertas.css";
 
 function AdminAlertasPage() {
   const [alertas, setAlertas] = useState([]);

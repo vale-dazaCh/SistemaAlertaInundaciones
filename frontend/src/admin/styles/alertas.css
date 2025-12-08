@@ -125,101 +125,25 @@
   background: #1f56b5;
 }
 
-/* ===== Tabla elegante ===== */
-
-.zonas-table {
+/* ============================
+   TABLAS
+============================ */
+.admin-table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 10px;
+  border-collapse: collapse;
+  margin-top: 1rem;
 }
 
-.zonas-table thead th {
+.admin-table th {
+  background: #f0f4ff;
   text-align: left;
-  padding: 12px;
-  background: #eef3ff;
-  color: #333;
+  padding: 0.75rem;
   font-weight: 600;
-  border-radius: 6px;
 }
 
-.zonas-table tbody tr {
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-
-.zonas-table td {
-  padding: 15px;
-  vertical-align: top;
-}
-
-/* ID pequeño */
-.id-col {
-  font-weight: bold;
-  color: #4b4b4b;
-}
-
-/* Info de zona */
-.zona-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.zona-desc {
-  margin-top: 4px;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-/* Coordenadas */
-.coords span {
-  display: block;
-  font-size: 0.85rem;
-  color: #444;
-}
-
-/* Clima */
-.weather-box {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.badge {
-  display: inline-block;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  width: fit-content;
-}
-
-.badge.temp {
-  background: #ffe3d8;
-  color: #b44200;
-}
-
-.badge.rain {
-  background: #d9ecff;
-  color: #005ea6;
-}
-
-.badge.precip {
-  background: #e6ddff;
-  color: #5936a6;
-}
-
-/* Botón actualizar clima */
-.btn-refresh {
-  padding: 4px 10px;
-  border: none;
-  background: #2d6cdf;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 4px;
-}
-
-.btn-refresh:hover {
-  background: #1b4eb8;
+.admin-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 /* Acciones */

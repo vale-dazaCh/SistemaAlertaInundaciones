@@ -5,6 +5,9 @@ from rest_framework import status
 
 from inundaciones.models import ZonaCritica, Alerta
 from django.contrib.auth.models import User
+import requests
+from rest_framework.permissions import AllowAny
+
 
 from .serializers import (
     ZonaCriticaSerializer,
@@ -79,3 +82,27 @@ def alertas_create(request):
 def usuarios_list(request):
     usuarios = User.objects.all()
     return Response(UsuarioSerializer(usuarios, many=True).data)
+
+@api_view(["GET"])
+@permission_classes([AllowAny])  # puedes restringirlo luego
+def clima_actual(request):
+    lat = request.query_params.get("lat", "-17.39")   # Cochabamba
+    lon = request.query_params.get("lon", "-66.15")
+
+    url = (
+        "https://api.open-meteo.com/v1/forecast"
+        f"?latitude={lat}&longitude={lon}&current=temperature_2m,precipitation,rain"
+    )
+
+    try:
+        r = requests.get(url)
+        data = r.json()
+        return Response({
+            "lat": lat,
+            "lon": lon,
+            "temperatura": data.get("current", {}).get("temperature_2m"),
+            "precipitacion": data.get("current", {}).get("precipitation"),
+            "lluvia": data.get("current", {}).get("rain"),
+        })
+    except Exception as e:
+        return Response({"error": "No se pudo obtener datos climáticos", "detail": str(e)}, status=500)

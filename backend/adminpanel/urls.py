@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import clima_actual
 
 urlpatterns = [
     # ZONAS
@@ -14,4 +15,6 @@ urlpatterns = [
 
     # USUARIOS
     path("usuarios/", views.usuarios_list),
+    # 🌦️ nuevo endpoint
+    path("clima/", clima_actual),
 ]

@@ -17,7 +17,34 @@ function AdminZonasPage() {
 
   const token = localStorage.getItem("access");
 
-  // Cargar zonas
+  // ============================================================
+  // === ESTADO PARA CLIMA (nuevo) ==============================
+  // ============================================================
+  const [climas, setClimas] = useState({});
+
+  // ============================================================
+  // === FUNCIÓN PARA OBTENER CLIMA POR ZONA ====================
+  // ============================================================
+  const obtenerClima = async (zona) => {
+  try {
+    const res = await fetch(
+      `http://localhost:8000/api/admin/clima/?lat=${zona.latitud}&lon=${zona.longitud}`
+    );
+
+      const data = await res.json();
+
+      setClimas((prev) => ({
+        ...prev,
+        [zona.id]: data,
+      }));
+    } catch (err) {
+      console.error("Error obteniendo clima:", err);
+    }
+  };
+
+  // ============================================================
+  // === CARGAR ZONAS ===========================================
+  // ============================================================
   const cargarZonas = async () => {
     try {
       const res = await fetch("http://localhost:8000/api/admin/zonas/", {
@@ -39,7 +66,18 @@ function AdminZonasPage() {
     cargarZonas();
   }, []);
 
-  // Cambios en formulario
+  // ============================================================
+  // === OBTENER CLIMA AUTOMÁTICO AL CARGAR ZONAS ===============
+  // ============================================================
+  useEffect(() => {
+    if (zonas.length > 0) {
+      zonas.forEach((z) => obtenerClima(z));
+    }
+  }, [zonas]);
+
+  // ============================================================
+  // === MANEJO DEL FORMULARIO ==================================
+  // ============================================================
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -97,14 +135,17 @@ function AdminZonasPage() {
       longitud: parseFloat(form.longitud),
     };
 
-    const res = await fetch(`http://localhost:8000/api/admin/zonas/${editingId}/`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(payload),
-    });
+    const res = await fetch(
+      `http://localhost:8000/api/admin/zonas/${editingId}/`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      }
+    );
 
     if (!res.ok) {
       alert("❌ Error al actualizar zona");
@@ -121,10 +162,13 @@ function AdminZonasPage() {
   const eliminarZona = async (id) => {
     if (!confirm("¿Eliminar esta zona?")) return;
 
-    const res = await fetch(`http://localhost:8000/api/admin/zonas/${id}/eliminar/`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const res = await fetch(
+      `http://localhost:8000/api/admin/zonas/${id}/eliminar/`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
 
     if (!res.ok) return alert("❌ Error eliminando zona");
 
@@ -210,45 +254,75 @@ function AdminZonasPage() {
           ) : zonas.length === 0 ? (
             <p>No hay zonas registradas</p>
           ) : (
-            <table className="admin-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Descripción</th>
-                  <th>Latitud</th>
-                  <th>Longitud</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
+           <table className="zonas-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Zona</th>
+      <th>Ubicación</th>
+      <th>Clima actual</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
 
-              <tbody>
-                {zonas.map((zona) => (
-                  <tr key={zona.id}>
-                    <td>{zona.id}</td>
-                    <td>{zona.nombre}</td>
-                    <td>{zona.descripcion}</td>
-                    <td>{zona.latitud}</td>
-                    <td>{zona.longitud}</td>
-                    <td>
-                      <button
-                        className="btn-edit"
-                        onClick={() => handleEditClick(zona)}
-                      >
-                        Editar
-                      </button>
+  <tbody>
+    {zonas.map((z) => (
+      <tr key={z.id}>
+        <td className="id-col">{z.id}</td>
 
-                      <button
-                        className="btn-delete"
-                        onClick={() => eliminarZona(zona.id)}
-                      >
-                        Eliminar
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        {/* Zona */}
+        <td>
+          <div className="zona-info">
+            <strong>{z.nombre}</strong>
+            <p className="zona-desc">{z.descripcion}</p>
+          </div>
+        </td>
+
+        {/* Ubicación */}
+        <td>
+          <div className="coords">
+            <span>📍 {z.latitud}</span>
+            <span>📍 {z.longitud}</span>
+          </div>
+        </td>
+
+        {/* Clima */}
+        <td>
+          {climas[z.id] ? (
+            <div className="weather-box">
+              <span className="badge temp">
+                🌡 {climas[z.id].temperatura ?? "--"}°C
+              </span>
+
+              <span className="badge rain">
+                🌧 Lluvia: {climas[z.id].lluvia ?? 0} mm
+              </span>
+
+              <span className="badge precip">
+                ☔ Prec.: {climas[z.id].precipitacion ?? 0} mm
+              </span>
+
+              
+            </div>
+          ) : (
+            <span>Cargando...</span>
+          )}
+        </td>
+
+        {/* Acciones */}
+        <td>
+          <button className="btn-edit" onClick={() => handleEditClick(z)}>
+            Editar
+          </button>
+          <button className="btn-delete" onClick={() => eliminarZona(z.id)}>
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
           )}
         </div>
       </main>
@@ -257,3 +331,4 @@ function AdminZonasPage() {
 }
 
 export default AdminZonasPage;
+
