@@ -53,7 +53,7 @@ function LoginPage() {
       localStorage.setItem("role", isAdmin ? "admin" : "general");
       // ---------------------------------------------------------
 
-      alert("Inicio de sesión exitoso 🚀");
+      alert("Inicio de sesión exitoso");
 
       // REDIRECCIÓN SEGÚN ROL
       if (isAdmin) {
