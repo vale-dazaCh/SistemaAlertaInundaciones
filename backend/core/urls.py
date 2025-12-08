@@ -19,4 +19,6 @@ urlpatterns = [
     path("api/", include(router.urls)),
     # 👇 Nueva API de autenticación
     path("api/auth/", include("api_auth.urls")),
+    path("api/admin/", include("adminpanel.urls")),
+
 ]

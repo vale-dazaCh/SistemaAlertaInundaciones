@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/login.css";
 
 function LoginPage() {
-  const navigate = useNavigate();   // 👈 SE AGREGA AQUÍ
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     email: "",
@@ -27,18 +27,40 @@ function LoginPage() {
 
       const data = await res.json();
 
+      console.log("DATA LOGIN:", data); // <<< DEBUG IMPORTANTE
+
       if (!res.ok) {
         alert("Credenciales inválidas ❌");
         return;
       }
 
-      alert("Inicio de sesión exitoso 🚀");
-
-      // ⬅ YA FUNCIONA
-      navigate("/usuario");
-
+      // GUARDAR TOKENS
       localStorage.setItem("access", data.access);
       localStorage.setItem("refresh", data.refresh);
+
+      // ---------------------------------------------------------
+      // CORRECCIÓN: detectar admin aunque backend envíe otro campo
+      // ---------------------------------------------------------
+      const u = data.user || {};
+
+      const isAdmin =
+        u.is_admin === true ||
+        u.is_admin === "true" ||
+        u.is_admin === 1 ||
+        u.is_superuser === true ||
+        u.is_staff === true;
+
+      localStorage.setItem("role", isAdmin ? "admin" : "general");
+      // ---------------------------------------------------------
+
+      alert("Inicio de sesión exitoso 🚀");
+
+      // REDIRECCIÓN SEGÚN ROL
+      if (isAdmin) {
+        navigate("/admin");
+      } else {
+        navigate("/usuario");
+      }
 
     } catch (error) {
       alert("Error al conectar con el servidor");
@@ -53,13 +75,7 @@ function LoginPage() {
         <section className="login-info">
           <h1 className="login-title">Ingresar al sistema</h1>
           <p className="login-subtitle">
-            Accede al sistema de alerta temprana para ver zonas críticas,
-            registrar información o gestionar alertas.
-          </p>
-
-          <p className="login-text">
-            Solo usuarios registrados pueden ingresar. Si aún no tienes una cuenta,
-            puedes crearla en la sección de registro.
+            Accede al sistema de alerta temprana para ver zonas críticas.
           </p>
         </section>
 
@@ -67,7 +83,6 @@ function LoginPage() {
           <div className="card login-card">
             <div className="card-header">
               <h2 className="card-title">Iniciar sesión</h2>
-              <p className="card-caption">Introduce tus credenciales</p>
             </div>
 
             <form onSubmit={handleSubmit} className="form-layout">
@@ -111,5 +126,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-
-

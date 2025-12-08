@@ -1,0 +1,163 @@
+/* ============================
+   LAYOUT GENERAL
+============================ */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f7fb;
+}
+
+/* ============================
+   SIDEBAR
+============================ */
+.admin-sidebar {
+  width: 240px;
+  background: #1a1d23;
+  color: white;
+  padding: 1.5rem;
+}
+
+.admin-logo {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+}
+
+.admin-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin-link {
+  color: #ddd;
+  text-decoration: none;
+  font-size: 1rem;
+  display: block;
+  padding: 0.4rem 0;
+}
+
+.admin-link.active {
+  color: white;
+  font-weight: bold;
+}
+
+/* ============================
+   CONTENIDO
+============================ */
+.admin-content {
+  flex: 1;
+  padding: 2rem 3rem;
+}
+
+.admin-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.admin-subtitle {
+  color: #6c757d;
+  margin-bottom: 2rem;
+}
+
+/* ============================
+   CARDS
+============================ */
+.admin-card {
+  background: white;
+  padding: 1.7rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.07);
+  border: 1px solid #e5e5e5;
+  margin-bottom: 1.5rem;
+}
+
+.admin-card h2 {
+  margin-top: 0;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+/* ============================
+   FORMULARIOS
+============================ */
+.admin-form label {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+  width: 100%;
+  padding: 0.48rem;
+  margin-top: 0.35rem;
+  border-radius: 6px;
+  border: 1px solid #cfcfcf;
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+.admin-form textarea {
+  resize: vertical;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Botón */
+.btn-primary {
+  background: #2d6cdf;
+  color: white;
+  padding: 0.55rem 1.2rem;
+  margin-top: 0.3rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #1f56b5;
+}
+
+/* ============================
+   TABLAS
+============================ */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.admin-table th {
+  background: #f0f4ff;
+  text-align: left;
+  padding: 0.75rem;
+  font-weight: 600;
+}
+
+.admin-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Acciones */
+.btn-edit {
+  background: #3498db;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 5px;
+  margin-right: 6px;
+}
+
+.btn-delete {
+  background: #e74c3c;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 5px;
+}

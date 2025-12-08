@@ -57,14 +57,15 @@ def login_view(request):
     refresh = RefreshToken.for_user(user)
 
     return Response({
-        "user": {
-            "id": user.id,
-            "email": user.email,
-            "nombre": user.first_name,
-        },
-        "access": str(refresh.access_token),
-        "refresh": str(refresh),
-    })
+    "user": {
+        "id": user.id,
+        "email": user.email,
+        "nombre": user.first_name,
+        "is_admin": user.is_staff,   # 👈 agregado
+    },
+    "access": str(refresh.access_token),
+    "refresh": str(refresh),
+})
 
 
 

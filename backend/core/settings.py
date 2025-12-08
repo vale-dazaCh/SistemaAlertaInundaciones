@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # Tu app
     'inundaciones',
     'api_auth',
+    'adminpanel',
 ]
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
